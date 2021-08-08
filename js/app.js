@@ -7,6 +7,7 @@ let Seattle = {
     AvgCookie : 6.3,
     customerNumber:[],
     sales:[],
+    total: 0,
 
 
   random: function(min ,max){
@@ -14,6 +15,7 @@ let Seattle = {
     max = Math.floor(this.maxCustomers);
     for(let i = 0 ; i < hours.length; i++){
     this.sales.push(Math.floor(Math.random() * (max - min + 1) + min)); 
+
  }
 
 },
@@ -22,6 +24,7 @@ let Seattle = {
 calculate: function(){
 for(let i = 0; i < hours.length; i++ ){
     this.sales.push(this.customerNumber[i] * this.AvgCookie);
+    this.total += this.sales[i];
 
 }
 },
@@ -37,6 +40,9 @@ for(let i = 0; i < hours.length ; i++){
 
 
 }
+let total= document.createElement('li');
+ulELement.appendChild(total);
+total.textContent= `total: ${this.total}`
 }
 }
 Seattle.random(23 , 65);
@@ -52,6 +58,7 @@ let Tokyo = {
     AvgCookie :  1.2,
     customerNumber:[],
     sales:[],
+    total: 0,
 
     random: function(min ,max){
         min = Math.ceil(this.minCustomers);
@@ -66,6 +73,7 @@ let Tokyo = {
     calculate: function(){
     for(let i = 0; i < hours.length; i++ ){
         this.sales.push(this.customerNumber[i] * this.AvgCookie);
+        this.total += this.sales[i];
     
     }
     },
@@ -78,8 +86,12 @@ let Tokyo = {
         let liELement = document.createElement('li');
         ulELement.appendChild(liELement);
         liELement.textContent = hours[i] +" : "+ this.sales[i];
-
+    
 }
+let total= document.createElement('li');
+ulELement.appendChild(total);
+  total.textContent= `total: ${this.total}`
+
     }
 }
 Tokyo.random(3 , 24);
@@ -93,6 +105,7 @@ let Dubai = {
     AvgCookie : 3.7,
     customerNumber:[],
     sales:[],
+    total: 0,
 
 
   random: function(min ,max){
@@ -109,6 +122,7 @@ let Dubai = {
 calculate: function(){
 for(let i = 0; i < hours.length; i++ ){
     this.sales.push(this.customerNumber[i] * this.AvgCookie);
+    this.total += this.sales[i];
 
 }
 },
@@ -122,6 +136,10 @@ for(let i = 0; i < hours.length ; i++){
     ulELement.appendChild(liELement);
     liELement.textContent = hours[i] +" : "+ this.sales[i];
 }
+
+let total= document.createElement('li');
+ulELement.appendChild(total);
+total.textContent= `total: ${this.total}`
 }
 }
 Dubai.random(11 , 38);
@@ -135,6 +153,7 @@ let Paris = {
     AvgCookie: 2.3,
     customerNumber:[],
     sales:[],
+    total: 0,
 
 
   random: function(min ,max){
@@ -151,6 +170,7 @@ let Paris = {
     calculate: function(){
     for(let i = 0; i < hours.length; i++ ){
         this.sales.push(this.customerNumber[i] * this.AvgCookie);
+        this.total += this.sales[i];
     
     }
     },
@@ -165,6 +185,9 @@ let Paris = {
         liELement.textContent = hours[i] +" : "+ this.sales[i];
 
     }
+    let total= document.createElement('li');
+   ulELement.appendChild(total);   
+   total.textContent= `total: ${this.total}`
   }
 }
 Paris.random(20 , 38);
@@ -178,6 +201,7 @@ let Lima = {
     AvgCookie : 4.6,
     customerNumber:[],
     sales:[],
+    total: 0,
 
 
     random: function(min ,max){
@@ -187,12 +211,14 @@ let Lima = {
         this.sales.push(Math.floor(Math.random() * (max - min + 1) + min)); 
      }
     
+    
     },
     
     
     calculate: function(){
     for(let i = 0; i < hours.length; i++ ){
         this.sales.push(this.customerNumber[i] * this.AvgCookie);
+        this.total += this.sales[i];
     
     }
     },
@@ -206,6 +232,9 @@ let Lima = {
         ulELement.appendChild(liELement);
         liELement.textContent = hours[i] +" : "+ this.sales[i];
 }
+let total= document.createElement('li');
+ulELement.appendChild(total);
+total.textContent= `total: ${this.total}`
     }
 }
 Lima.random(2 , 16);
