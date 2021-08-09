@@ -1,242 +1,168 @@
-'use strict';
-let hours = ['6 am', '7 am', '8 am','9 am' , ' 10 am' , '11 am ' , '12 pm' , '1 pm' , '2 pm',  '3 pm' , '4 pm' , '5 pm' , '6 pm','7 pm'];
-let Seattle = {
-    locationName :'Seattle',
-    minCustomers : 23,
-    maxCustomers : 65,
-    AvgCookie : 6.3,
-    customerNumber:[],
-    sales:[],
-    total: 0,
+ 'use strict';
+ 
 
 
-  random: function(min ,max){
-    min = Math.ceil(this.minCustomers);
-    max = Math.floor(this.maxCustomers);
-    for(let i = 0 ; i < hours.length; i++){
-    this.sales.push(Math.floor(Math.random() * (max - min + 1) + min)); 
-
- }
-
-},
-
-
-calculate: function(){
-for(let i = 0; i < hours.length; i++ ){
-    this.sales.push(this.customerNumber[i] * this.AvgCookie);
-    this.total += this.sales[i];
-
-}
-},
-
-render: function(){
-let conatiner = document.getElementById('seattle1');
-let ulELement = document.createElement('ul');
-conatiner.appendChild(ulELement);
-for(let i = 0; i < hours.length ; i++){
-    let liELement = document.createElement('li');
-    ulELement.appendChild(liELement);
-    liELement.textContent = hours[i] +" : "+ this.sales[i];
-
-
-}
-let total= document.createElement('li');
-ulELement.appendChild(total);
-total.textContent= `total: ${this.total}`
-}
-}
-Seattle.random(23 , 65);
-Seattle.calculate();
-Seattle.render();
-
-
-
-let Tokyo = {
-    locationName : 'Tokyo',
-    minCustomers : 3,
-    maxCustomers : 24,
-    AvgCookie :  1.2,
-    customerNumber:[],
-    sales:[],
-    total: 0,
-
-    random: function(min ,max){
-        min = Math.ceil(this.minCustomers);
-        max = Math.floor(this.maxCustomers);
-        for(let i = 0 ; i < hours.length; i++){
-        this.sales.push(Math.floor(Math.random() * (max - min + 1) + min)); 
-     }
+    let storeArray=[];
+    let hours = ['6 am', '7 am', '8 am','9 am' , ' 10 am' , '11 am ' , '12 pm' , '1 pm' , '2 pm',  '3 pm' , '4 pm' , '5 pm' , '6 pm','7 pm'];
+    let container = document.getElementById('container');
+    let tableElement = document.createElement('table');
+    container.appendChild(tableElement);
     
-    },
-    
-    
-    calculate: function(){
-    for(let i = 0; i < hours.length; i++ ){
-        this.sales.push(this.customerNumber[i] * this.AvgCookie);
-        this.total += this.sales[i];
-    
+      function Store (storeName, minCustomer, maxCustomer, avgCookie){
+      this.storeName =storeName;
+      this.minCustomer = minCustomer;
+      this.maxCustomer = maxCustomer;
+      this.avgCookie = avgCookie;
+      this.sales = [];
+      this.customerNumber = [];
+      this.total = 0;
+      storeArray.push(this)  
     }
-    },
+   Store.prototype.getcustomerNumber = function(){
+       let min = Math.ceil(this.minCustomer);
+      let  max = Math.floor(this.maxCustomer);
+        
+        for (let i=0; i<hours.length; i++){
+            
+            this.customerNumber.push(Math.floor(Math.random() * (max - min + 1) + min))  
+        }
+        
+      };
     
-    render: function(){
-    let conatiner = document.getElementById('tokyo1');
-    let ulELement = document.createElement('ul');
-    conatiner.appendChild(ulELement);
-    for(let i = 0; i < hours.length ; i++){
-        let liELement = document.createElement('li');
-        ulELement.appendChild(liELement);
-        liELement.textContent = hours[i] +" : "+ this.sales[i];
     
-}
-let total= document.createElement('li');
-ulELement.appendChild(total);
-  total.textContent= `total: ${this.total}`
+     Store.prototype.getsales= function(){
+        for (let i=0; i<hours.length; i++){
+          let calcuSales= Math.ceil(this.customerNumber[i]*this.avgCookie);
+          this.sales.push(calcuSales);
+          this.total += calcuSales;
+        }
+      };
+        Store.prototype.render = function () {
 
+             let trEl= document.createElement('tr');
+
+             tableElement.appendChild(trEl)
+             let tdEl1 = document.createElement('td');
+             trEl.appendChild(tdEl1);
+             tdEl1.textContent = `${this.storeName}`;
+        for (let i=0;i<hours.length;i++){  
+            
+         let tdEl = document.createElement('td');
+        trEl.appendChild(tdEl);
+
+        tdEl.textContent = `${this.sales[i]}`;
+         }
+
+        let tdEl2 = document.createElement('td');
+         trEl.appendChild(tdEl2);
+
+         tdEl2.textContent = this.total; 
     }
-}
-Tokyo.random(3 , 24);
-Tokyo.calculate();
-Tokyo.render();
+           
+       
+        
+      function createtableHeader() {
+            let trEl = document.createElement('tr');
+            tableElement.appendChild(trEl);
+         
+             let thEl1 = document.createElement('th');
+            trEl.appendChild(thEl1);
+            thEl1.textContent = '';
+         
+            for(let i = 0; i <= hours.length-1; i++) {
+                let thEl1 = document.createElement('th');
+                trEl.appendChild(thEl1);
+                thEl1.textContent = `${hours[i]}`;
+         
+            }
+            let thEl2 = document.createElement('th');
+             trEl.appendChild(thEl2);
+            thEl2.textContent = 'Daily Store Total';
+        }
 
-let Dubai = {
-    locationName : 'Dubai',
-    minCustomers : 11,
-    maxCustomers : 38,
-    AvgCookie : 3.7,
-    customerNumber:[],
-    sales:[],
-    total: 0,
-
-
-  random: function(min ,max){
-    min = Math.ceil(this.minCustomers);
-    max = Math.floor(this.maxCustomers);
-    for(let i = 0 ; i < hours.length; i++){
-    this.sales.push(Math.floor(Math.random() * (max - min + 1) + min)); 
-
- }
-
-},
-
-
-calculate: function(){
-for(let i = 0; i < hours.length; i++ ){
-    this.sales.push(this.customerNumber[i] * this.AvgCookie);
-    this.total += this.sales[i];
-
-}
-},
-
-render: function(){
-let conatiner = document.getElementById('dubai1');
-let ulELement = document.createElement('ul');
-conatiner.appendChild(ulELement);
-for(let i = 0; i < hours.length ; i++){
-    let liELement = document.createElement('li');
-    ulELement.appendChild(liELement);
-    liELement.textContent = hours[i] +" : "+ this.sales[i];
-}
-
-let total= document.createElement('li');
-ulELement.appendChild(total);
-total.textContent= `total: ${this.total}`
-}
-}
-Dubai.random(11 , 38);
-Dubai.calculate();
-Dubai.render();
-
-let Paris = {
-    locationName : 'Paris',
-    minCustomers: 20,
-    maxCustomers: 38,
-    AvgCookie: 2.3,
-    customerNumber:[],
-    sales:[],
-    total: 0,
-
-
-  random: function(min ,max){
-    min = Math.ceil(this.minCustomers);
-    max = Math.floor(this.maxCustomers);
-    for(let i = 0 ; i < hours.length; i++){
-    this.sales.push(Math.floor(Math.random() * (max - min + 1) + min)); 
-
-     }
-    
-    },
+         createtableHeader();
+         
+        function createtableFooter(){
+            
+            let trEl = document.createElement('tr');
+            tableElement.appendChild(trEl)
+            let thEl20 = document.createElement('td');
+            trEl.appendChild(thEl20);
+            thEl20.textContent = "total";
+         
+            let totalTable =0;
+            
+            for(let i=0 ; i<hours.length;i++){
+                let total=0;
+                 
+                for(let j=0 ; j<storeArray.length;j++){
+                    total = total + storeArray[j].sales[i];
+                    totalTable = totalTable +  storeArray[j].sales[i];
+         
+            }
+             
+        let thEl10 = document.createElement('td');
+            trEl.appendChild(thEl10);
+            thEl10.textContent = total;
+        }
+        let thEl70 = document.createElement('td');
+            trEl.appendChild(thEl70);
+            thEl70.textContent = totalTable;
+        };
     
     
-    calculate: function(){
-    for(let i = 0; i < hours.length; i++ ){
-        this.sales.push(this.customerNumber[i] * this.AvgCookie);
-        this.total += this.sales[i];
+        let Seattle = new Store ('seatlle', 23, 65,6.3)
+        let Tokyo  =   new Store ('Tokyo', 3, 24,1.2)
+        let Dubai =   new Store ('Dubai', 11, 38,3.7)
+        let Paris =   new Store ('Paris', 20, 38,2.3)
+        let Lima =    new Store ('Lima', 2, 16,4.6)
+        Seattle.getcustomerNumber();
+        Seattle.getsales();
+        Seattle.render()
     
-    }
-    },
+        Tokyo.getcustomerNumber()
+        Tokyo.getsales();
+        Tokyo.render()
     
-    render: function(){
-    let conatiner = document.getElementById('paris1');
-    let ulELement = document.createElement('ul');
-    conatiner.appendChild(ulELement);
-    for(let i = 0; i < hours.length ; i++){
-        let liELement = document.createElement('li');
-        ulELement.appendChild(liELement);
-        liELement.textContent = hours[i] +" : "+ this.sales[i];
+        Dubai.getcustomerNumber();
+        Dubai.getsales();
+        Dubai.render()
+    
+        Paris.getcustomerNumber();
+        Paris.getsales();
+        Paris.render()
+    
+        Lima.getcustomerNumber();
+        Lima.getsales();
+        Lima.render()
 
-    }
-    let total= document.createElement('li');
-   ulELement.appendChild(total);   
-   total.textContent= `total: ${this.total}`
-  }
-}
-Paris.random(20 , 38);
-Paris.calculate();
-Paris.render();
-
-let Lima = {
-    locationName : 'Lima',
-    minCustomers : 2,
-    maxCustomers : 16,
-    AvgCookie : 4.6,
-    customerNumber:[],
-    sales:[],
-    total: 0,
+        
+        createtableFooter();
 
 
-    random: function(min ,max){
-        min = Math.ceil(this.minCustomers);
-        max = Math.floor(this.maxCustomers);
-        for(let i = 0 ; i < hours.length; i++){
-        this.sales.push(Math.floor(Math.random() * (max - min + 1) + min)); 
-     }
-    
-    
-    },
-    
-    
-    calculate: function(){
-    for(let i = 0; i < hours.length; i++ ){
-        this.sales.push(this.customerNumber[i] * this.AvgCookie);
-        this.total += this.sales[i];
-    
-    }
-    },
-    
-    render: function(){
-    let conatiner = document.getElementById('lima1');
-    let ulELement = document.createElement('ul');
-    conatiner.appendChild(ulELement);
-    for(let i = 0; i < hours.length ; i++){
-        let liELement = document.createElement('li');
-        ulELement.appendChild(liELement);
-        liELement.textContent = hours[i] +" : "+ this.sales[i];
-}
-let total= document.createElement('li');
-ulELement.appendChild(total);
-total.textContent= `total: ${this.total}`
-    }
-}
-Lima.random(2 , 16);
-Lima.calculate();
-Lima.render();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
