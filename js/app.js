@@ -1,5 +1,4 @@
  'use strict';
- 
 
 
     let storeArray=[];
@@ -71,6 +70,7 @@
          
             for(let i = 0; i <= hours.length-1; i++) {
                 let thEl1 = document.createElement('th');
+                
                 trEl.appendChild(thEl1);
                 thEl1.textContent = `${hours[i]}`;
          
@@ -101,13 +101,13 @@
          
             }
              
-        let thEl10 = document.createElement('td');
-            trEl.appendChild(thEl10);
-            thEl10.textContent = total;
+        let thE3 = document.createElement('td');
+            trEl.appendChild(thE3);
+            thE3.textContent = total;
         }
-        let thEl70 = document.createElement('td');
-            trEl.appendChild(thEl70);
-            thEl70.textContent = totalTable;
+        let thEl4 = document.createElement('td');
+            trEl.appendChild(thEl4);
+            thEl4.textContent = totalTable;
         };
     
     
@@ -136,7 +136,7 @@
         Lima.getsales();
         Lima.render()
 
-        
+
         createtableFooter();
 
 
