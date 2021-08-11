@@ -1,4 +1,4 @@
- 'use strict';
+'use strict';
 
 
     let storeArray=[];
@@ -78,10 +78,31 @@
             let thEl2 = document.createElement('th');
              trEl.appendChild(thEl2);
             thEl2.textContent = 'Daily Store Total';
+      
         }
+        let myform = document.getElementById('myForm');
+        myform.addEventListener('submit', addStore);
+        function addStore(event) {
+        
+            event.preventDefault();
+            let storeName = event.target.storeName.value;
+            let minCustomer = event.target.minCustomer.value;
+            let maxCustomer = event.target.maxCustomer.value;
+            let avgCookie = event.target.avgCookie.value;
+            let newStore = new Store(storeName , minCustomer, maxCustomer , avgCookie);
+            newStore.getcustomerNumber();
+            newStore.getsales();
+            newStore.render();
 
+
+
+
+            
+      
+      }
          createtableHeader();
-         
+
+
         function createtableFooter(){
             
             let trEl = document.createElement('tr');
@@ -109,8 +130,10 @@
             trEl.appendChild(thEl4);
             thEl4.textContent = totalTable;
         };
-    
-    
+       
+       
+
+        
         let Seattle = new Store ('seatlle', 23, 65,6.3)
         let Tokyo  =   new Store ('Tokyo', 3, 24,1.2)
         let Dubai =   new Store ('Dubai', 11, 38,3.7)
@@ -134,35 +157,17 @@
     
         Lima.getcustomerNumber();
         Lima.getsales();
-        Lima.render()
+        Lima.render();
+        
 
 
         createtableFooter();
+  
+        
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      
 
 
