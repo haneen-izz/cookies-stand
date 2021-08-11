@@ -93,14 +93,15 @@
             newStore.getcustomerNumber();
             newStore.getsales();
             newStore.render();
+
+
+
+
             
       
       }
          createtableHeader();
 
-         for (let i = 0; i < storeArray.length; i++) {
-          storeArray[i].render();
-         }
 
         function createtableFooter(){
             
