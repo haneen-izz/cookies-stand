@@ -57,8 +57,9 @@
 
          tdEl2.textContent = this.total; 
     }
+    
+    
            
-       
         
       function createtableHeader() {
             let trEl = document.createElement('tr');
@@ -75,16 +76,32 @@
                 thEl1.textContent = `${hours[i]}`;
          
             }
+          
             let thEl2 = document.createElement('th');
              trEl.appendChild(thEl2);
             thEl2.textContent = 'Daily Store Total';
-      
-      
-       
-      
+          }
+            let myform = document.getElementById('myForm');
+            myform.addEventListener('submit', addStore);
+            function addStore(event) {
+            
+                event.preventDefault();
+                let storeName = event.target.storeName.value;
+                let minCustomer = event.target.minCustomer.value;
+                let maxCustomer = event.target.maxCustomer.value;
+                let avgCookie = event.target.avgCookie.value;
+                let newStore = new Store(storeName , minCustomer, maxCustomer , avgCookie);
+                let table = tableElement.rows.length-1;
+                tableElement.deleteRow(table);
+                newStore.getcustomerNumber();
+                newStore.getsales();
+                
+                newStore.render();
+                
+                createtableFooter();
       }
-         createtableHeader();
-
+        
+      createtableHeader();
 
         function createtableFooter(){
             
@@ -102,31 +119,9 @@
                 for(let j=0 ; j<storeArray.length;j++){
                     total = total + storeArray[j].sales[i];
                     totalTable = totalTable +  storeArray[j].sales[i];
-         
-            
-             
+     
+                }
       
-        }
-         let myform = document.getElementById('myForm');
-        myform.addEventListener('submit', addStore);
-        function addStore(event) {
-        
-            event.preventDefault();
-            let storeName = event.target.storeName.value;
-            let minCustomer = event.target.minCustomer.value;
-            let maxCustomer = event.target.maxCustomer.value;
-            let avgCookie = event.target.avgCookie.value;
-            let newStore = new Store(storeName , minCustomer, maxCustomer , avgCookie);
-            let table = tableElement.rows.length-1;
-            tableElement.deleteRow(table);
-
-            newStore.getcustomerNumber();
-            newStore.getsales();
-            newStore.render();
-        
-
-       
-        }
         let thE3 = document.createElement('td');
         trEl.appendChild(thE3);
         thE3.textContent = total;
@@ -134,8 +129,10 @@
     let thEl4 = document.createElement('td');
         trEl.appendChild(thEl4);
         thEl4.textContent = totalTable;
-  
+      
   }
+  
+  
         let Seattle = new Store ('seatlle', 23, 65,6.3)
         let Tokyo  =   new Store ('Tokyo', 3, 24,1.2)
         let Dubai =   new Store ('Dubai', 11, 38,3.7)
@@ -160,10 +157,11 @@
         Lima.getcustomerNumber();
         Lima.getsales();
         Lima.render();
-        
-
 
         createtableFooter();
+
+
+     
   
         
 
