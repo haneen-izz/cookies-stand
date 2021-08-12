@@ -28,6 +28,7 @@ padding-left: 25%;
     font-family:Georgia, 'Times New Roman', Times, serif;
     text-align: center;
     list-style-position: outside;
+    list-style: none;
 
 }
 
@@ -44,6 +45,7 @@ padding-left: 25%;
  font-family:Georgia, 'Times New Roman', Times, serif;
  text-align: center;
  list-style-position: outside;
+ list-style: none;
 
  
 }
